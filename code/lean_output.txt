@@ -1,0 +1,3 @@
+Output of `lake env lean CaseBound.lean` (Lean 4.33.1, Mathlib 0df444a360eaa60ab8c11dca51a86af692955474),
+13 October 2026. The compiler printed nothing; its exit status follows.
+exit 0

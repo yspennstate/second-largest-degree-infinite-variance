@@ -1,0 +1,378 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools,enumitem,booktabs}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{theoremA}{Theorem A}
+\newtheorem*{problem*}{Problem}
+\numberwithin{equation}{section}
+
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\Nb}{\overline N}
+\newcommand{\dK}{d_{\mathrm K}}
+\newcommand{\tdK}{\widetilde d_{\mathrm K}}
+\newcommand{\dTV}{d_{\mathrm{TV}}}
+\newcommand{\Po}{\mathrm{Po}}
+\DeclareMathOperator{\Var}{Var}
+
+\hypersetup{pdftitle={The second largest outdegree of conditioned Galton--Watson trees with infinite variance},pdfauthor={Yitzchak Shmalo}}
+
+\title[The second largest outdegree with infinite variance]{The second largest outdegree of conditioned Galton--Watson trees with infinite variance}
+\author{Yitzchak Shmalo}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{13 October 2026}
+\subjclass[2020]{60C05, 60J80, 05C05, 60F05}
+\keywords{Conditioned Galton--Watson tree, simply generated tree, random allocation, balls in boxes, maximum degree, infinite variance}
+
+\begin{document}
+\begin{abstract}
+Let $\xi$ be a random variable with values in $\{0,1,2,\dots\}$ and $\E\xi=1$, let $Y_{(1)}\ge Y_{(2)}\ge\dots$ be the outdegrees, in decreasing order, of a Galton--Watson tree with offspring distribution $\xi$ conditioned to have $n$ vertices, and let $\xi_{(1)}\ge\xi_{(2)}\ge\dots$ be the order statistics of $n$ independent copies of $\xi$. Janson proved that if $\xi$ has finite variance then, for every fixed $j$, $Y_{(j)}$ and $\xi_{(j)}$ have asymptotically the same distribution. He asked whether two consequences of this remain true when the variance is infinite: that $Y_{(1)}<h(n)$ with high probability when $n\Pp(\xi\ge h(n))\to0$, and that $Y_{(j)}\ge h(n)$ with high probability for every fixed $j$ when $n\Pp(\xi\ge h(n))\to\infty$. Kortchemski and Richier showed that the first can fail. We show that the second can fail as well. We construct an offspring distribution with mean $1$ and infinite variance, and integers $n_r\to\infty$ and $L_r$ with $n_r\Pp(\xi\ge L_r)\ge r$, such that with probability at least $1-1/r$ the conditioned tree with $n_r$ vertices has exactly one vertex of outdegree at least $L_r$, of outdegree $(r+\frac12)L_r$, while all other vertices have outdegree at most $L_r/(64(\log n_r)^2)$. Along $n_r$ the largest outdegree is of larger order than $\xi_{(1)}$ and the second largest is of smaller order than $\xi_{(2)}$, and each of the six conclusions of Janson's theorem fails. The same holds for the random allocation of $n-1$ balls into $n$ boxes.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Let $w=(w_k)_{k\ge0}$ be a sequence of nonnegative weights with $w_0>0$ and $w_k>0$ for some $k\ge1$. For integers $m\ge0$ and $n\ge1$, the random allocation $B_{m,n}=(Y_1,\dots,Y_n)$ of $m$ balls into $n$ boxes is the random vector in $\Z_{\ge0}^n$ with
+\[
+\Pp\bigl(B_{m,n}=(y_1,\dots,y_n)\bigr)=\frac{1}{Z(m,n)}\prod_{i=1}^nw_{y_i},\qquad y_1+\dots+y_n=m,
+\]
+where $Z(m,n)$ is the normalizing constant, assumed to be positive. We write $Y_{(1)}\ge Y_{(2)}\ge\dots\ge Y_{(n)}$ for $Y_1,\dots,Y_n$ in decreasing order, and we follow the notation of Janson's survey \cite{J12}. When $w$ is a probability distribution, $B_{m,n}$ is the vector of $n$ independent random variables with distribution $w$ conditioned on their sum being $m$. If moreover $\cT_n$ is a Galton--Watson tree with offspring distribution $w$ conditioned to have $n$ vertices, then by \cite[Lemma~17.1]{J12} $\cT_n$ and $B_{n-1,n}$ can be coupled so that the outdegrees of the vertices of $\cT_n$, listed in depth-first order, form a cyclic shift of $B_{n-1,n}$. In particular the outdegrees of $\cT_n$ in decreasing order have the same distribution as $(Y_{(1)},\dots,Y_{(n)})$ for $m=n-1$.
+
+Let $\Phi(t)=\sum_kw_kt^k$, let $\rho$ be its radius of convergence, let $\Psi(t)=t\Phi'(t)/\Phi(t)$ for $0\le t<\rho$, let $\nu=\lim_{t\uparrow\rho}\Psi(t)$, and let $\omega=\sup\{k:w_k>0\}$. For $0<\lambda\le\nu$ let $\tau\in(0,\rho]$ be given by $\Psi(\tau)=\lambda$, with $\Psi(\rho):=\nu$, and let $\xi$ be a random variable with $\Pp(\xi=k)=w_k\tau^k/\Phi(\tau)$, so that $\E\xi=\lambda$ \cite[Sections~3 and~11]{J12}. Let $\xi_1,\dots,\xi_n$ be independent copies of $\xi$ and $\xi_{(1)}\ge\dots\ge\xi_{(n)}$ their order statistics, and for $A\subseteq\Z_{\ge0}$ let
+\[
+N_A=|\{i\le n:Y_i\in A\}|,\qquad \Nb_A=|\{i\le n:\xi_i\in A\}|.
+\]
+For random variables $X$ and $X'$ with values in $\Z_{\ge0}$ let
+\[
+\dK(X,X')=\sup_{x\in\Z_{\ge0}}|\Pp(X\le x)-\Pp(X'\le x)|,\qquad \dTV(X,X')=\sup_{A\subseteq\Z_{\ge0}}|\Pp(X\in A)-\Pp(X'\in A)|,
+\]
+and for random variables with values in $\Z_{\ge0}\cup\{\infty\}$ let
+\[
+\tdK(X,X')=\sup_{x\in\Z_{\ge0}}\frac{|\Pp(X\le x)-\Pp(X'\le x)|}{1+x}.
+\]
+Here $\Po(\infty)$ is the distribution of a random variable that equals $\infty$ identically, an event holds with high probability (w.h.p.) if its probability tends to $1$, and $\log$ is the natural logarithm. The following is \cite[Theorem~19.7]{J12} with the further statements for the case $\lambda<\nu$ omitted.\footnote{In the arXiv version of \cite{J12} the theorem is Theorem~18.7 and the problem below is Problem~18.30.}
+
+\begin{theoremA}[{Janson \cite[Theorem~19.7]{J12}}]
+Let $w=(w_k)_{k\ge0}$ be a weight sequence with $w_0>0$ and $\omega=\infty$. Suppose that $n\to\infty$ and $m=m(n)$ with $m=\lambda n+o(\sqrt n)$ where $0<\lambda\le\nu$. Suppose further that $\sigma^2:=\Var\xi<\infty$. \textup{(}This is redundant when $\lambda<\nu$.\textup{)}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If \textup{(}possibly for $n$ in a subsequence\textup{)} $h(n)$ are integers such that $n\Pp(\xi\ge h(n))\to\alpha$, for some $\alpha\in[0,\infty]$, then $N_{[h(n),\infty)}:=|\{i:Y_i\ge h(n)\}|\to\Po(\alpha)$ in distribution.
+\item If $h(n)$ are integers such that $n\Pp(\xi\ge h(n))\to0$, then w.h.p.\ $Y_{(1)}<h(n)$.
+\item If $h(n)$ are integers such that $n\Pp(\xi\ge h(n))\to\infty$, then, for every fixed $j$, w.h.p.\ $Y_{(j)}\ge h(n)$.
+\item For any sequence $h(n)$, $\tdK\bigl(N_{[h(n),\infty)},\Nb_{[h(n),\infty)}\bigr)\to0$.
+\item For every fixed $j$, $\dK\bigl(Y_{(j)},\xi_{(j)}\bigr)\to0$.
+\item $\dTV\bigl(Y_{(1)},\xi_{(1)}\bigr)\to0$.
+\end{enumerate}
+\end{theoremA}
+
+The hypothesis $\sigma^2<\infty$ matters only when $\lambda=\nu$. In \cite[Example~19.27]{J12}, where $\lambda=\nu$ and $w_k\sim ck^{-\alpha-1}$ with $1<\alpha<2$, the asymptotic distributions of $Y_{(1)}$ and $\xi_{(1)}$ are different, while in \cite[Example~19.29]{J12}, where $w_k\sim ck^{-3}$, the conclusions of Theorem~A hold although $\sigma^2=\infty$. Janson then wrote: ``Note that in Example~19.27, although the asymptotic distributions of $Y_{(1)}$ and $\xi_{(1)}$ are different, they are still of the same order of magnitude. We do not know whether this is true in general. This question can be formulated more precisely as follows.''
+
+\begin{problem*}[{Janson \cite[Problem~19.30]{J12}}]
+In the case $\lambda=\nu$, do Theorem~19.7\textup{(ii)--(iii)} hold also when $\sigma^2=\infty$?
+\end{problem*}
+
+Kortchemski and Richier \cite{KR19} studied critical offspring distributions with $\Pp(\xi\ge k)\sim\ell(k)/k$ as $k\to\infty$, where $\ell$ is slowly varying; this is the case $\lambda=\nu=1$ with $\sigma^2=\infty$. They proved that the largest outdegree of $\cT_n$, divided by $|b_n|$, tends to $1$ in probability, while the second, third, \dots\ largest outdegrees, divided by $a_n$, converge jointly in distribution to the points, in decreasing order, of a Poisson process on $(0,\infty)$ with intensity $x^{-2}\,dx$ \cite[Theorem~3]{KR19}. Here $a_n$ and $b_n$ are explicit sequences with $a_n=o(|b_n|)$, and $\xi_{(1)}/a_n,\xi_{(2)}/a_n,\dots$ converge to the points of the same Poisson process. As they observed, taking $h(n)=(a_n|b_n|)^{1/2}$ shows that part~(ii) of Theorem~A fails in their setting, which answers Problem~19.30 negatively for part~(ii). Their theorem also shows that $Y_{(1)}$ and $\xi_{(1)}$ need not be of the same order of magnitude. Part~(iii), on the other hand, holds in their setting: there $n\Pp(\xi\ge h(n))\to\infty$ forces $h(n)=o(a_n)$, while $Y_{(j)}/a_n$ has a positive limit in distribution for every $j\ge2$ and $Y_{(1)}/a_n\to\infty$.
+
+We show that part~(iii) can fail as well. Our example is in the tree case $m=n-1$, with $\lambda=\nu=1$.
+
+\begin{theorem}\label{thm:main}
+There are a probability distribution $w$ on $\Z_{\ge0}$ and integers $n_1<n_2<\cdots$ and $L_1<L_2<\cdots$, all $L_r$ even, with the following properties, where $\xi$ has distribution $w$ and $K_r=(r+\frac12)L_r$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\E\xi=1$, $\Var\xi=\infty$, $w_0>0$, $w_k>0$ for infinitely many $k$, and $L_r\ge\sqrt{n_r}\,\log n_r$.
+\item $n_r\Pp(\xi\ge L_r)\ge r$, $n_r\Pp(\xi\ge K_r)\le\frac1{2r+1}+2^{-r-3}$, and $\Pp(L_r<\xi<K_r)=0$.
+\item Let $n=n_r$ and $(Y_1,\dots,Y_n)=B_{n-1,n}$. Then
+\[
+\Pp\Bigl(Y_{(1)}=K_r\ \text{ and }\ Y_{(2)}\le\frac{L_r}{64(\log n_r)^2}\Bigr)\ge1-\frac1r.
+\]
+\end{enumerate}
+\end{theorem}
+
+By the coupling of \cite[Lemma~17.1]{J12} recalled above, part~(c) holds also when $Y_{(1)}\ge Y_{(2)}$ are the two largest outdegrees of the Galton--Watson tree $\cT_{n_r}$ with offspring distribution $w$ conditioned to have $n_r$ vertices.
+
+\begin{corollary}\label{cor:fail}
+Let $w$, $n_r$, $L_r$ and $K_r$ be as in Theorem~\ref{thm:main}, and let $m=n-1$. Then $\rho=\tau=\lambda=\nu=1$, the random variable $\xi$ of Theorem~A has distribution $w$, and all hypotheses of Theorem~A hold except $\sigma^2<\infty$. Moreover, the following hold, where $n=n_r$ in each probability.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Let $h(n_r)=L_r$ for every $r$ and $h(n)=1$ for all other $n$. Then $n\Pp(\xi\ge h(n))\to\infty$, but $\Pp(Y_{(2)}\ge h(n_r))\le1/r$ and $\Pp(N_{[h(n_r),\infty)}=1)\ge1-1/r$.
+\item Let $h(n_r)=K_r$ for every $r$ and $h(n)=n$ for all other $n$. Then $n\Pp(\xi\ge h(n))\to0$, but $\Pp(Y_{(1)}\ge h(n_r))\ge1-1/r$ and
+\[
+\tdK\bigl(N_{[h(n_r),\infty)},\Nb_{[h(n_r),\infty)}\bigr)\ge1-\frac1r-\frac1{2r+1}-2^{-r-3}.
+\]
+\item For every $j\ge1$ and every $r\ge2j$, $\dK(Y_{(j)},\xi_{(j)})\ge1-5/r$.
+\item As $r\to\infty$,
+\[
+\Pp\bigl(Y_{(1)}\ge(r+\tfrac12)L_r\bigr)\to1,\quad \Pp\bigl(\xi_{(1)}\le L_r\bigr)\to1,\quad \Pp\Bigl(Y_{(2)}\le\frac{L_r}{64(\log n_r)^2}\Bigr)\to1,\quad \Pp\bigl(\xi_{(2)}\ge L_r\bigr)\to1.
+\]
+\end{enumerate}
+Consequently each of the conclusions \textup{(i)--(vi)} of Theorem~A fails: \textup{(i)} with $\alpha=\infty$ by \textup{(a)} and with $\alpha=0$ by \textup{(b)}, \textup{(ii)} by \textup{(b)}, \textup{(iii)} for every $j\ge2$ by \textup{(a)}, \textup{(iv)} by \textup{(b)}, \textup{(v)} for every $j$ by \textup{(c)}, and \textup{(vi)} by \textup{(c)}, since $\dTV\ge\dK$.
+\end{corollary}
+
+By Theorem~\ref{thm:main}(c) and part~(d), with probability tending to $1$ along $n_r$ we have $\xi_{(1)}=\xi_{(2)}=L_r$, $Y_{(1)}=(r+\frac12)L_r$ and $Y_{(2)}\le L_r/(64(\log n_r)^2)$. So the largest outdegree is larger than $\xi_{(1)}$ by the factor $r+\frac12\to\infty$, and the second largest is smaller than $\xi_{(2)}$ by at least the factor $64(\log n_r)^2$.
+
+The distribution $w$ is built in stages. At stage $r$ it has an atom at a frequent value $L_r$, of probability $r/n_r$, and an atom at a rare value $K_r=(r+\frac12)L_r$, of probability $1/((2r+1)n_r)$; every other value is at most $L_r/(64(\log n_r)^2)$ or larger than $n_r$. Among $n_r$ independent copies of $\xi$, about $r$ take the value $L_r$ and, with probability about $1/(2r+1)$, one takes the value $K_r$; on average the two atoms contribute $rL_r+\frac12L_r=K_r$ to the sum. If $a$ of the copies take the value $L_r$ and $c$ take the value $K_r$, then on the event that the sum is $n_r-1$ the remaining small values must deviate from their mean by $((r+\frac12)(1-c)-a)L_r$, up to an error of order $r$. Because of the half in $r+\frac12$, the coefficient $(r+\frac12)(1-c)-a$ is at least $\frac12$ in absolute value unless $(a,c)=(0,1)$. A deviation of $L_r/2$ is about $\frac12\log n_r$ standard deviations of the sum of the small values, so for $(a,c)\ne(0,1)$ the small values reach the required sum with probability at most $\exp(-c'(\log n_r)^2)$ for a constant $c'>0$, which is smaller than any power of $n_r$. The configuration $(a,c)=(0,1)$ has probability of order $e^{-r}/(2r+1)$, and since it needs a deviation of order $r$ only, the small values then reach the required sum with probability of order $n_r^{-1/2}$. For large $n_r$ the conditioning therefore removes every copy of $L_r$ and keeps exactly one copy of $K_r$.
+
+We do not know whether part~(iii) of Theorem~A can fail for $j=1$.
+
+Section~\ref{sec:llt} gives a local limit estimate with explicit constants. Section~\ref{sec:construction} constructs $w$ and proves Theorem~\ref{thm:main}(a) and~(b), Section~\ref{sec:proof} proves Theorem~\ref{thm:main}(c), and Section~\ref{sec:cor} proves Corollary~\ref{cor:fail}. Section~\ref{sec:checks} describes computer checks of the identities and inequalities used in the proofs.
+
+\section{A local limit estimate}\label{sec:llt}
+
+\begin{lemma}\label{lem:llt}
+Let $b\ge1$ be an integer and $0<\gamma\le\frac12$. Let $X$ be a random variable with values in $\{0,1,\dots,b\}$ such that $\Pp(X=0)\ge\gamma$ and $\Pp(X=1)\ge\gamma$, with mean $\mu$ and variance $v$. Let $N\ge4$, let $T_N$ be the sum of $N$ independent copies of $X$, and suppose that $s:=\sqrt{Nv}\ge16b$. Then for every integer $j$,
+\[
+\Bigl|s\,\Pp(T_N=j)-\frac{1}{\sqrt{2\pi}}e^{-(j-N\mu)^2/(2s^2)}\Bigr|\le\Bigl(\frac bs\Bigr)^{1/4}+\frac1N+s\exp\Bigl(-\frac{2\gamma^2N}{\pi^2b^2}\Bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\varphi(t)=\E e^{it(X-\mu)}$ and $y=(j-N\mu)/s$. By Fourier inversion and the substitution $t=u/s$,
+\[
+s\,\Pp(T_N=j)=\frac{s}{2\pi}\int_{-\pi}^{\pi}\varphi(t)^Ne^{-it(j-N\mu)}\,dt=\frac1{2\pi}\int_{|u|\le\pi s}\varphi(u/s)^Ne^{-iuy}\,du,
+\]
+and $(2\pi)^{-1/2}e^{-y^2/2}=(2\pi)^{-1}\int_{\R}e^{-u^2/2}e^{-iuy}\,du$. Let $A=(s/b)^{1/4}$, so that $2\le A\le s/b\le\pi s$. Then the left side of the claimed inequality is at most $(I_1+I_2+I_3+I_4)/(2\pi)$, where
+\begin{align*}
+I_1&=\int_{|u|\le A}\bigl|\varphi(u/s)^N-e^{-u^2/2}\bigr|\,du, & I_2&=\int_{A<|u|\le s/b}|\varphi(u/s)|^N\,du,\\
+I_3&=\int_{s/b<|u|\le\pi s}|\varphi(u/s)|^N\,du, & I_4&=\int_{|u|>A}e^{-u^2/2}\,du.
+\end{align*}
+Since $|X-\mu|\le b$, we have $v\le b^2$ and $\E|X-\mu|^3\le bv$. Let $X'$ be an independent copy of $X$; then $|\varphi(t)|^2=\E\cos(t(X-X'))$ and $\E(X-X')^2=2v$.
+
+Let $|u|\le A$ and $t=u/s$. Then $b|t|\le bA/s=(b/s)^{3/4}\le\frac18$ and $vt^2\le b^2t^2\le\frac1{64}$. By Taylor's theorem, $|\varphi(t)-1+\frac12vt^2|\le\frac16bv|t|^3\le\frac1{48}vt^2$, so $|\varphi(t)|\le1-\frac{23}{48}vt^2\le e^{-23vt^2/48}$. Also $|e^{-vt^2/2}-1+\frac12vt^2|\le\frac18v^2t^4$ and $e^{-vt^2/2}\le e^{-23vt^2/48}$. Using $|z^N-z'^N|\le N|z-z'|\max(|z|,|z'|)^{N-1}$, $N-1\ge\frac34N$ and $Nvt^2=u^2$, we get
+\[
+\bigl|\varphi(t)^N-e^{-u^2/2}\bigr|\le N\Bigl(\frac{bv|t|^3}6+\frac{v^2t^4}8\Bigr)e^{-\frac{23}{64}u^2}=\Bigl(\frac{b|u|^3}{6s}+\frac{u^4}{8N}\Bigr)e^{-\alpha u^2},\qquad\alpha=\frac{23}{64}.
+\]
+Since $\int_{\R}|u|^3e^{-\alpha u^2}\,du=\alpha^{-2}$ and $\int_{\R}u^4e^{-\alpha u^2}\,du=\frac34\sqrt\pi\,\alpha^{-5/2}$, this gives $I_1\le1.2905\,b/s+2.1463/N$.
+
+For $|t|\le1/b$ we have $|t(X-X')|\le1$, and $1-\cos x\ge\frac{x^2}2-\frac{x^4}{24}\ge\frac{11}{24}x^2$ for $|x|\le1$, so $|\varphi(t)|^2\le1-\frac{11}{24}t^2\E(X-X')^2=1-\frac{11}{12}vt^2\le e^{-11vt^2/12}$. Hence $|\varphi(u/s)|^N\le e^{-11u^2/24}$ for $|u|\le s/b$. Using $\int_{|u|>A}e^{-\beta u^2}\,du\le e^{-\beta A^2}/(\beta A)$ for $\beta>0$, and $A\ge2$,
+\[
+I_2\le\frac{24}{11}\cdot\frac{e^{-11/6}}{A},\qquad I_4\le\frac{2e^{-2}}{A}.
+\]
+For $1/b<|t|\le\pi$, since $1-\cos t\ge2t^2/\pi^2$ for $|t|\le\pi$ \textup{(}the function $(1-\cos t)/t^2$ decreases on $(0,\pi]$\textup{)} and $\Pp(|X-X'|=1)\ge2\Pp(X=0)\Pp(X=1)\ge2\gamma^2$,
+\[
+1-|\varphi(t)|^2=\E\bigl(1-\cos(t(X-X'))\bigr)\ge\Pp(|X-X'|=1)(1-\cos t)\ge\frac{4\gamma^2t^2}{\pi^2}\ge\frac{4\gamma^2}{\pi^2b^2}.
+\]
+Hence $|\varphi(t)|^N\le\exp(-2\gamma^2N/(\pi^2b^2))$ there, and $I_3\le2\pi s\exp(-2\gamma^2N/(\pi^2b^2))$.
+
+Finally $b/s=(b/s)^{1/4}(b/s)^{3/4}\le\frac18(b/s)^{1/4}$ and $1/A=(b/s)^{1/4}$, so
+\[
+\frac{I_1+I_2+I_3+I_4}{2\pi}\le\frac1{2\pi}\Bigl(\frac{1.2905}8+\frac{24}{11}e^{-11/6}+2e^{-2}\Bigr)\Bigl(\frac bs\Bigr)^{1/4}+\frac{2.1463}{2\pi N}+s\exp\Bigl(-\frac{2\gamma^2N}{\pi^2b^2}\Bigr).
+\]
+The two constants are less than $0.125$ and $0.342$, which proves the lemma.
+\end{proof}
+
+\section{The construction}\label{sec:construction}
+
+The distribution $w$ is built from integers $n_r$ and even integers $L_r$, $r\ge1$, chosen below. Put $K_r=(r+\frac12)L_r$ and
+\begin{equation}\label{eq:atoms}
+p_r=\frac r{n_r},\qquad q_r=\frac1{(2r+1)n_r},\qquad \eta_r=p_rL_r+q_rK_r=\frac{K_r}{n_r},
+\end{equation}
+and let $\kappa_1=\sum_{r\ge1}(p_r+q_r)$ and $\kappa_2=\sum_{r\ge1}\eta_r$. Provided that $\kappa_1,\kappa_2\le\frac18$ and that the numbers $0,1,2,L_1,K_1,L_2,K_2,\dots$ are distinct, let $w$ be the distribution with
+\begin{equation}\label{eq:w}
+w_{L_r}=p_r,\quad w_{K_r}=q_r\quad(r\ge1),\qquad w_0=\tfrac14-\kappa_1+\kappa_2,\quad w_1=\tfrac12-\kappa_2,\quad w_2=\tfrac14,
+\end{equation}
+and $w_k=0$ for all other $k$. Its total mass is $1$ and its mean is $w_1+2w_2+\kappa_2=1$.
+
+The integers are chosen recursively. Let $n_0=1$ and $K_0=2$. Let $r\ge1$, suppose that $n_i$ and $L_i$ have been chosen for $1\le i<r$, and put
+\[
+V_r=\frac32+\sum_{i=1}^{r-1}\bigl(p_iL_i^2+q_iK_i^2\bigr),\qquad b_r=K_{r-1}.
+\]
+For an integer $n\ge2$ let $s=\sqrt{nV_r}$ and $\Lambda=\log n$, and let $L$ be the least even integer with $L\ge\Lambda s$. We let $n_r=n$ and $L_r=L$ for an $n$ that satisfies the following five conditions, where $b=b_r$ and $V=V_r$.
+\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=3.2em]
+\item $n\ge2^{r+3}(r+1)\,n_{r-1}$ and $(r+\frac12)L\le2^{-r-3}\,n/n_{r-1}$.
+\item $L>2\max(b,n_{r-1})$ and $L\ge13r+8$.
+\item $s\ge64b\Lambda$ and $n\ge800(r+1)^2+1$.
+\item $(n-1)V\ge6\cdot40^8\,b^2$ and $2s\exp\bigl(-(n-1)/(32\pi^2b^2)\bigr)\le\frac1{40}$.
+\item $7(2r+1)e^{r+1}s\,e^{-\Lambda^2/37}\le\frac1r$.
+\end{enumerate}
+Such an $n$ exists. Indeed, $b$, $V$ and $n_{r-1}$ do not depend on $n$, while $s$ is of order $\sqrt n$ and $L$ of order $\sqrt n\log n$; hence each condition holds for all large $n$, for (C5) because $s\,e^{-\Lambda^2/37}=\sqrt{nV}\,e^{-(\log n)^2/37}\to0$. For example, the least powers of $2$ that satisfy (C1)--(C5) at the first five stages are $n_1=2^{47}$, $n_2=2^{132}$, $n_3=2^{322}$, $n_4=2^{725}$ and $n_5=2^{1556}$ (Section~\ref{sec:checks}).
+
+\begin{lemma}\label{lem:w}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $2<L_1$, and $b_r<L_r<K_r<n_r<L_{r+1}$ for every $r\ge1$. In particular $0<1<2<L_1<K_1<L_2<K_2<\cdots$.
+\item For every $i\ge1$, $p_i+q_i\le2^{-i-3}/n_{i-1}$ and $\eta_i\le2^{-i-3}/n_{i-1}$. Hence $\kappa_1,\kappa_2\le\frac18$, and $w$ is a probability distribution with mean $1$, $w_0\ge\frac18$ and $w_1\ge\frac38$.
+\item $p_rL_r^2\ge r(\log n_r)^2V_r$ for every $r$. In particular $\Var\xi=\infty$.
+\item Let $\zeta_r=\sum_{i>r}(p_i+q_i)$ and $\zeta'_r=\sum_{i>r}\eta_i$. Then $n_r\zeta_r\le2^{-r-3}$ and $n_r\zeta'_r\le2^{-r-3}$.
+\item Theorem~\ref{thm:main}\textup{(a)} and \textup{(b)} hold.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) By (C2), $L_1>2\max(b_1,n_0)=4$ and $b_r<L_r$; by (C1), $K_r=(r+\frac12)L_r\le2^{-r-3}n_r/n_{r-1}<n_r$; and by (C2) at stage $r+1$, $L_{r+1}>2n_r$. Since $b_{r+1}=K_r$, the chain follows.
+
+(b) By (C1), $p_i+q_i\le(i+1)/n_i\le2^{-i-3}/n_{i-1}$ and $\eta_i=(i+\frac12)L_i/n_i\le2^{-i-3}/n_{i-1}$. As $n_{i-1}\ge1$, it follows that $\kappa_1,\kappa_2\le\sum_{i\ge1}2^{-i-3}=\frac18$. Together with (a), this shows that \eqref{eq:w} defines a probability distribution, with $w_0\ge\frac14-\frac18$ and $w_1\ge\frac12-\frac18$; its mean is $1$ as computed above.
+
+(c) Since $L_r\ge\Lambda s$ with $\Lambda=\log n_r$ and $s^2=n_rV_r$, we have $p_rL_r^2\ge(r/n_r)(\log n_r)^2n_rV_r=r(\log n_r)^2V_r$. As $V_r\ge\frac32$ and $n_r\ge3$, $\E\xi^2\ge\sum_rp_rL_r^2=\infty$.
+
+(d) For $i>r$ we have $n_{i-1}\ge n_r$, so by (b) $n_r\zeta_r\le\sum_{i>r}2^{-i-3}=2^{-r-3}$, and likewise $n_r\zeta'_r\le2^{-r-3}$.
+
+(e) By (a), $L_r<n_r<L_{r+1}<n_{r+1}$, so both sequences increase, and every $L_r$ is even by construction. The first four statements of Theorem~\ref{thm:main}(a) follow from (b) and (c), and $L_r\ge\log n_r\sqrt{n_rV_r}\ge\sqrt{n_r}\log n_r$. By (a), the values of $\xi$ that are at least $L_r$ are $L_r$, $K_r$ and the values $L_i,K_i$ with $i>r$, and no value lies strictly between $L_r$ and $K_r$. Hence $n_r\Pp(\xi\ge L_r)\ge n_r(p_r+q_r)\ge r$ and, by (d), $n_r\Pp(\xi\ge K_r)=n_r(q_r+\zeta_r)\le\frac1{2r+1}+2^{-r-3}$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}(c)}\label{sec:proof}
+
+Fix $r\ge1$ and write $n=n_r$, $m=n-1$, $L=L_r$, $K=K_r$, $p=p_r$, $q=q_r$, $b=b_r$, $V=V_r$, $s=\sqrt{nV}$ and $\Lambda=\log n$. Let $\xi_1,\dots,\xi_n$ be independent with distribution $w$ and $S_n=\xi_1+\dots+\xi_n$, so that $B_{m,n}$ is $(\xi_1,\dots,\xi_n)$ conditioned on $S_n=m$; here $\Pp(S_n=m)>0$ since $w_0,w_1>0$. By Lemma~\ref{lem:w}(a), every value of $\xi$ is either \emph{low}, in $[0,b]$, or equal to $L$, or equal to $K$, or \emph{high}, at least $L_{r+1}$, and $L_{r+1}>n>m$. Let $\theta=\Pp(\xi\le b)$, let $X$ be a random variable with the distribution of $\xi$ conditioned on $\xi\le b$, with mean $\mu$ and variance $v$, and let $T_N$ be the sum of $N$ independent copies of $X$, with $T_0=0$.
+
+\begin{lemma}\label{lem:low}
+We have $\theta\ge\frac78$, $\mu\le\frac87$, $\Pp(X=0)\ge\frac18$, $\Pp(X=1)\ge\frac38$, $\frac16V\le v\le\frac87V$, and $b\le s/(64\Lambda)\le L/(64\Lambda^2)$.
+\end{lemma}
+
+\begin{proof}
+We have $\theta=1-p-q-\zeta_r\ge1-\kappa_1\ge\frac78$, $\mu=\E[\xi;\xi\le b]/\theta\le\E\xi/\theta\le\frac87$, $\Pp(X=0)=w_0/\theta\ge w_0\ge\frac18$ and $\Pp(X=1)\ge w_1\ge\frac38$. The low values are $0$, $1$, $2$ and $L_i,K_i$ for $i<r$, so $\E[\xi^2;\xi\le b]=w_1+4w_2+\sum_{i<r}(p_iL_i^2+q_iK_i^2)=V-\kappa_2$. Hence $v\le\E X^2\le V/\theta\le\frac87V$. If $r\ge2$, then $V\ge\frac32+p_1L_1^2\ge2$ by Lemma~\ref{lem:w}(c), and $v=\E X^2-\mu^2\ge V-\kappa_2-(\frac87)^2\ge V-\frac18-\frac{64}{49}\ge\frac16V$. If $r=1$, then $b=2$, $V=\frac32$, and $X$ takes the values $0,1,2$ with probabilities $x_0\ge\frac18$, $x_1\ge\frac38$ and $x_2=w_2/\theta\ge\frac14$. The variance $x_0x_1+4x_0x_2+x_1x_2$ is a concave function of $(x_0,x_1,x_2)$ on the simplex, so on the triangle $\{x_0\ge\frac18,\ x_1\ge\frac38,\ x_2\ge\frac14,\ x_0+x_1+x_2=1\}$ its minimum is attained at a vertex. The values at the vertices $(\frac38,\frac38,\frac14)$, $(\frac18,\frac58,\frac14)$ and $(\frac18,\frac38,\frac12)$ are $\frac{39}{64}$, $\frac{23}{64}$ and $\frac{31}{64}$, so $v\ge\frac{23}{64}>\frac14=\frac16V$. Finally, $b\le s/(64\Lambda)$ by (C3), and $s\le L/\Lambda$ by the choice of $L$.
+\end{proof}
+
+For integers $a,c\ge0$ let $E_{a,c}$ be the event that exactly $a$ of $\xi_1,\dots,\xi_n$ equal $L$ and exactly $c$ of them equal $K$. On $\{S_n=m\}$ no $\xi_i$ is high, so on $E_{a,c}\cap\{S_n=m\}$ the other $n-a-c$ variables are low and their sum is $m-aL-cK$. Hence, for $a+c\le n$,
+\begin{equation}\label{eq:decomp}
+\Pp(S_n=m,\,E_{a,c})=\binom{n}{a,\,c,\,n-a-c}p^aq^c\theta^{n-a-c}\,\Pp(T_{n-a-c}=m-aL-cK),
+\end{equation}
+and $\Pp(S_n=m,E_{a,c})=0$ for $a+c>n$. On $E_{0,1}\cap\{S_n=m\}$ we have $Y_{(1)}=K$ and $Y_{(2)}\le b\le L/(64\Lambda^2)$ by Lemma~\ref{lem:low}. Since $(1+1/r)^{-1}\ge1-1/r$, Theorem~\ref{thm:main}(c) follows from
+\begin{equation}\label{eq:goal}
+\sum_{(a,c)\ne(0,1)}\Pp(S_n=m,\,E_{a,c})\le\frac1r\,\Pp(S_n=m,\,E_{0,1}).
+\end{equation}
+
+\subsection*{The deviations}
+Let $x=n\zeta_r$ and $y=n\zeta'_r$, so that $0\le x,y\le2^{-r-3}\le\frac1{16}$ by Lemma~\ref{lem:w}(d). Splitting $\E\xi=1$ according to the classes of values gives $\theta\mu+\eta_r+\zeta'_r=1$, that is, $n\theta\mu=n-K-y$; also $n\theta=n-r-\frac1{2r+1}-x$. For $a+c\le n$ let
+\[
+D(a,c)=m-aL-cK-(n-a-c)\mu
+\]
+be the deviation of $m-aL-cK$ from the mean of $T_{n-a-c}$. Writing $m=n\theta\mu+K+y-1$ and $K=(r+\frac12)L$, a direct computation gives
+\begin{equation}\label{eq:D}
+D(a,c)=\bigl((r+\tfrac12)(1-c)-a\bigr)L+(a+c-1)\mu+D_0,
+\end{equation}
+where
+\[
+D_0:=D(0,1)=\Bigl(1-r-\frac1{2r+1}-x\Bigr)\mu+y-1.
+\]
+The coefficient of $\mu$ in $D_0$ lies in $[-(r-\frac23+\frac1{16}),0]$ and $0\le\mu\le\frac87$, so
+\begin{equation}\label{eq:D0}
+|D_0|\le\frac87\Bigl(r-\frac23+\frac1{16}\Bigr)+1\le2r+2.
+\end{equation}
+
+\begin{lemma}\label{lem:case}
+Let $r\ge1$, $L\ge13r+8$, $0\le\mu\le\frac87$ and $|D_0|\le2r+2$. Then for all integers $a,c\ge0$ with $(a,c)\ne(0,1)$,
+\[
+\Delta:=\bigl((r+\tfrac12)(1-c)-a\bigr)L+(a+c-1)\mu+D_0\quad\text{satisfies}\quad|\Delta|\ge\frac L4.
+\]
+\end{lemma}
+
+\begin{proof}
+Note that $L-\mu\ge0$.
+If $c=0$ and $a\le r$, then $\Delta=(r+\frac12-a)L+(a-1)\mu+D_0\ge\frac12L-\frac87-2r-2\ge\frac14L$, since $L\ge13r+8\ge8r+\frac{88}7$.
+If $c=0$ and $a\ge r+1$, then
+\[
+\Delta=-(a-r-\tfrac12)(L-\mu)+(r-\tfrac12)\mu+D_0\le-\tfrac12(L-\mu)+\tfrac87(r-\tfrac12)+2r+2\le-\tfrac12L+\tfrac{22}7r+2\le-\tfrac14L,
+\]
+since $L\ge13r+8\ge\frac{88}7r+8$.
+If $c=1$, then $a\ge1$ and $\Delta=-a(L-\mu)+D_0\le-L+\frac87+2r+2\le-\frac14L$.
+If $c\ge2$, then
+\[
+\Delta=-(c-1)\bigl((r+\tfrac12)L-\mu\bigr)-a(L-\mu)+D_0\le-(r+\tfrac12)L+\tfrac87+2r+2\le-\tfrac14L.\qedhere
+\]
+\end{proof}
+
+\subsection*{The configurations other than \texorpdfstring{$(0,1)$}{(0,1)}}
+Let $(a,c)\ne(0,1)$ with $a+c\le n$, and put $N=n-a-c$ and $j=m-aL-cK$, so that $j-N\mu=D(a,c)$. By (C2), Lemma~\ref{lem:low}, \eqref{eq:D}, \eqref{eq:D0} and Lemma~\ref{lem:case}, $|j-N\mu|\ge L/4\ge\Lambda s/4$. If $N=0$, then $|j|\ge L/4>0$ and $\Pp(T_0=j)=0$. If $N\ge1$, then, since $|X-\mu|\le b$ and $Nv\le nv\le\frac87s^2$, Bernstein's inequality \cite{Ben62} with $t=\Lambda s/4$ gives
+\[
+\Pp(T_N=j)\le\Pp(|T_N-N\mu|\ge t)\le2\exp\Bigl(-\frac{t^2}{2(Nv+bt/3)}\Bigr)\le2\exp\Bigl(-\frac{\Lambda^2}{32(\frac87+\frac1{768})}\Bigr)\le2e^{-\Lambda^2/37},
+\]
+where we used $bt/3=b\Lambda s/12\le s^2/768$, by Lemma~\ref{lem:low}. By \eqref{eq:decomp} and the multinomial theorem,
+\begin{equation}\label{eq:rest}
+\sum_{(a,c)\ne(0,1)}\Pp(S_n=m,\,E_{a,c})\le2e^{-\Lambda^2/37}\sum_{a+c\le n}\binom{n}{a,\,c,\,n-a-c}p^aq^c\theta^{n-a-c}\le2e^{-\Lambda^2/37}.
+\end{equation}
+
+\subsection*{The configuration \texorpdfstring{$(0,1)$}{(0,1)}}
+By \eqref{eq:decomp}, $\Pp(S_n=m,E_{0,1})=nq\,\theta^{n-1}\,\Pp(T_{n-1}=m-K)$, and $nq=1/(2r+1)$. Write $\theta=1-z$, where $nz=n(p+q+\zeta_r)=r+\frac1{2r+1}+x\le r+\frac13+\frac1{16}$. Then $z\le\frac12$ and $nz^2\le(r+1)^2/n\le\frac12$ by (C3), and since $1-z\ge e^{-z-z^2}$ for $0\le z\le\frac12$,
+\[
+\theta^{n-1}\ge\theta^n\ge e^{-nz-nz^2}\ge e^{-r-\frac13-\frac1{16}-\frac12}\ge e^{-r-1}.
+\]
+We apply Lemma~\ref{lem:llt} with $\gamma=\frac18$, $N=n-1$ and $j=m-K$, for which $j-N\mu=D_0$. Let $s'=\sqrt{(n-1)v}$. By Lemma~\ref{lem:low} and (C4), $s'^2\ge(n-1)V/6\ge40^8b^2$, so $s'\ge16b$ and $(b/s')^{1/4}\le\frac1{40}$. By (C3), $1/N\le\frac1{40}$. Since $s'\le\sqrt{8/7}\,s\le2s$ and $2\gamma^2N/(\pi^2b^2)=(n-1)/(32\pi^2b^2)$, (C4) gives $s'\exp(-2\gamma^2N/(\pi^2b^2))\le\frac1{40}$. Moreover $s'^2\ge(n-1)V/6\ge(n-1)/4\ge200(r+1)^2$ by (C3), so $D_0^2/(2s'^2)\le(2r+2)^2/(400(r+1)^2)=0.01$ by \eqref{eq:D0}. Lemma~\ref{lem:llt} therefore gives
+\[
+s'\,\Pp(T_{n-1}=m-K)\ge\frac{e^{-0.01}}{\sqrt{2\pi}}-\frac3{40}>0.3199,
+\]
+so $\Pp(T_{n-1}=m-K)>0.3199/(\sqrt{8/7}\,s)>0.29/s$, and
+\[
+\Pp(S_n=m,\,E_{0,1})\ge\frac{e^{-r-1}}{2r+1}\cdot\frac{0.29}{s}.
+\]
+Together with \eqref{eq:rest} and (C5),
+\[
+\frac{\sum_{(a,c)\ne(0,1)}\Pp(S_n=m,E_{a,c})}{\Pp(S_n=m,E_{0,1})}\le\frac{2}{0.29}(2r+1)e^{r+1}s\,e^{-\Lambda^2/37}\le7(2r+1)e^{r+1}s\,e^{-\Lambda^2/37}\le\frac1r,
+\]
+which is \eqref{eq:goal}. This proves Theorem~\ref{thm:main}(c).
+
+\section{Proof of Corollary~\ref{cor:fail}}\label{sec:cor}
+
+Since $\E\xi=1$, the radius of convergence $\rho$ of $\Phi(t)=\E t^\xi$ is at least $1$, and since $\E\xi^2=\infty$ it is at most $1$. As $t\uparrow1$, $\Phi(t)\to1$ and $\Phi'(t)\to\E\xi=1$ by monotone convergence, so $\nu=\lim_{t\uparrow1}\Psi(t)=1$. For $m=n-1=n+o(\sqrt n)$ we have $\lambda=1=\nu$ and $\tau=\rho=1$, and the random variable $\xi$ of Theorem~A has $\Pp(\xi=k)=w_k\tau^k/\Phi(\tau)=w_k$. By Theorem~\ref{thm:main}(a), $w_0>0$, $\omega=\infty$ and $\sigma^2=\infty$.
+
+Let $\cG_r$ be the event in Theorem~\ref{thm:main}(c), for $n=n_r$. On $\cG_r$ exactly one $Y_i$ is at least $L_r$, and it equals $K_r$, since $L_r/(64(\log n_r)^2)<L_r$. Let $\bar\mu_r=n_r\Pp(\xi\ge L_r)\ge r$. For $n=n_r$ the variable $\Nb_{[L_r,\infty)}$ has the binomial distribution with mean $\bar\mu_r$ and variance at most $\bar\mu_r$, so for every $j\ge1$ and $r\ge2j$ we have $j-1<\bar\mu_r/2$ and, by Chebyshev's inequality,
+\begin{equation}\label{eq:cheb}
+\Pp\bigl(\Nb_{[L_r,\infty)}\le j-1\bigr)\le\Pp\bigl(|\Nb_{[L_r,\infty)}-\bar\mu_r|\ge\bar\mu_r/2\bigr)\le\frac4{\bar\mu_r}\le\frac4r.
+\end{equation}
+Also $\Pp(\Nb_{[K_r,\infty)}=0)\ge1-n_r\Pp(\xi\ge K_r)\ge1-\frac1{2r+1}-2^{-r-3}$ by Theorem~\ref{thm:main}(b).
+
+(a) For $n=n_r$, $n\Pp(\xi\ge h(n))\ge r$, and for other $n$, $n\Pp(\xi\ge1)=n(1-w_0)\ge\frac58n$. On $\cG_r$ we have $Y_{(2)}<L_r$ and $N_{[L_r,\infty)}=1$, which gives the two bounds.
+
+(b) For $n=n_r$, $n\Pp(\xi\ge h(n))\le\frac1{2r+1}+2^{-r-3}$, and for other $n$, $n\Pp(\xi\ge n)\le\E[\xi;\xi\ge n]\to0$. On $\cG_r$ we have $Y_{(1)}=K_r$ and $N_{[K_r,\infty)}=1$, so $\Pp(Y_{(1)}\ge K_r)\ge1-\frac1r$ and, taking $x=0$ in the definition of $\tdK$,
+\[
+\tdK\bigl(N_{[K_r,\infty)},\Nb_{[K_r,\infty)}\bigr)\ge\Pp\bigl(\Nb_{[K_r,\infty)}=0\bigr)-\Pp\bigl(N_{[K_r,\infty)}=0\bigr)\ge1-\frac1{2r+1}-2^{-r-3}-\frac1r.
+\]
+
+(c) For $j=1$, $\Pp(Y_{(1)}\le K_r-1)\le\Pp(\cG_r^c)\le\frac1r$ and $\Pp(\xi_{(1)}\le K_r-1)=\Pp(\Nb_{[K_r,\infty)}=0)\ge1-\frac1{2r+1}-2^{-r-3}$, so $\dK(Y_{(1)},\xi_{(1)})\ge1-\frac3r$. For $j\ge2$, $\Pp(Y_{(j)}\le L_r-1)\ge\Pp(\cG_r)\ge1-\frac1r$, while $\Pp(\xi_{(j)}\le L_r-1)=\Pp(\Nb_{[L_r,\infty)}\le j-1)\le\frac4r$ by \eqref{eq:cheb}; so $\dK(Y_{(j)},\xi_{(j)})\ge1-\frac5r$.
+
+(d) The first and third limits hold because $\Pp(\cG_r)\ge1-\frac1r$. Since no value of $\xi$ lies strictly between $L_r$ and $K_r$, $\Pp(\xi_{(1)}\le L_r)=\Pp(\Nb_{[K_r,\infty)}=0)\to1$. By \eqref{eq:cheb} with $j=2$, $\Pp(\xi_{(2)}\ge L_r)=\Pp(\Nb_{[L_r,\infty)}\ge2)\ge1-\frac4r$ for $r\ge4$.
+
+For the final statement, (i) with $\alpha=\infty$ would give $N_{[h(n),\infty)}\to\infty$ in probability, and with $\alpha=0$ it would give $N_{[h(n),\infty)}\to0$ in probability; (a) and (b) exclude both. The remaining failures are immediate from (a)--(c), using $\dTV\ge\dK$ \cite[Lemma~19.5]{J12} for (vi). \qed
+
+\section{Computations}\label{sec:checks}
+
+The repository listed under Data availability contains a Python script, \texttt{checks.py}, with its output, and a Lean file, \texttt{CaseBound.lean}. The script computes the conditional distribution of $(a,c)$ given $S_n=n-1$ for a one-stage version of $w$, with values $0,1,2,L,K$, $p=r/n$ and $q=1/((2r+1)n)$, from \eqref{eq:decomp} in double precision, with a pruned weight below $10^{-20}$ of the total, and checks \eqref{eq:decomp} against a direct convolution in three small cases. For $n=10^6$ and $L$ the least even integer at least $s\log n$, the conditional probability that $(a,c)\ne(0,1)$ is $2.9\cdot10^{-28}$ for $r=2$ and $9.7\cdot10^{-26}$ for $r=4$, while for independent copies the probability that at least two of them are at least $L$ is $0.645$ and $0.916$. When $L$ is instead about $s$, the conditional probability that at least two values are at least $L$ is about $0.90$ for $r=2$ and $0.99$ for $r=4$. The script also checks \eqref{eq:D} in exact rational arithmetic, Lemma~\ref{lem:case} on $346{,}500$ cases, together with a control showing that the bound fails at a vertex for every even $L$ just below $\frac{88}7r+8$, $r\le30$; Lemma~\ref{lem:llt} against the distributions of $T_N$, computed by the fast Fourier transform, for $48$ random laws, where the largest ratio of the error to the bound is $0.0015$, together with a control showing that without the atom at $1$ the error stays near $(2\pi)^{-1/2}$; the numerical constants in Sections~\ref{sec:llt}--\ref{sec:proof}; and conditions (C1)--(C5) for $r\le5$ in high-precision arithmetic. The Lean file, checked with Lean~4 \cite{MU21} (version 4.33.1) and Mathlib \cite{Mathlib20}, proves \eqref{eq:D}, the bound $|D_0|\le2r+2$ of \eqref{eq:D0}, and Lemma~\ref{lem:case}.
+
+These computations test the identities and inequalities used in the proofs; they are not part of them.
+
+\section*{Acknowledgements and funding}
+The research presented in this paper was supported by the European Research
+Council (ERC) under the European Union's Horizon Europe research and
+innovation programme (grant agreement No.~101041711), by the Simons
+Foundation as part of the Collaboration on the Mathematical and Scientific
+Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by
+the Israel Science Foundation (grant number 2258/19), and by the Israel
+Science Foundation (ISF Grant 4101/25). Computational resources were
+provided in part by Google Cloud through its education credits program
+(credit 530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and
+has a management role at Convex Nexus Capital. These entities are included
+in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics. Problem~19.30 of \cite{J12} was among the open problems in probability on which the project's agents worked in September 2026. On 14 September 2026 Claude Fable~5.1 (Anthropic) found the mechanism behind Theorem~\ref{thm:main}, a rare value that exceeds the mass missing from the sum by exactly the expected total of a frequent value, so that the conditioning removes every copy of the frequent value; it sketched a proof and checked the mechanism on an exact example. On 13 October 2026 Claude Opus~5.5 (Anthropic), working in Claude Code, found the construction of Section~\ref{sec:construction} and the proofs in their present form, including Lemma~\ref{lem:llt}, searched the literature, and wrote the computer checks, the Lean file and the manuscript. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Data availability}
+No data were used. The code and the Lean file are available at\\ \url{https://github.com/yspennstate/second-largest-degree-infinite-variance}.
+
+\begin{thebibliography}{9}
+
+\bibitem{Ben62}
+G.~Bennett, Probability inequalities for the sum of independent random variables, \emph{J. Amer. Statist. Assoc.} \textbf{57} (1962), 33--45.
+
+\bibitem{J12}
+S.~Janson, Simply generated trees, conditioned Galton--Watson trees, random allocations and condensation, \emph{Probab. Surv.} \textbf{9} (2012), 103--252.
+
+\bibitem{KR19}
+I.~Kortchemski and L.~Richier, Condensation in critical Cauchy Bienaym\'e--Galton--Watson trees, \emph{Ann. Appl. Probab.} \textbf{29} (2019), no.~3, 1837--1877.
+
+\bibitem{MU21}
+L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE~28}, Lecture Notes in Comput. Sci. \textbf{12699}, Springer, 2021, 625--635.
+
+\bibitem{Mathlib20}
+The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, ACM, 2020, 367--381.
+
+\end{thebibliography}
+\end{document}

@@ -61,7 +61,7 @@ and for random variables with values in $\Z_{\ge0}\cup\{\infty\}$ let
 \[
 \tdK(X,X')=\sup_{x\in\Z_{\ge0}}\frac{|\Pp(X\le x)-\Pp(X'\le x)|}{1+x}.
 \]
-Here $\Po(\infty)$ is the distribution of a random variable that equals $\infty$ identically, an event holds with high probability (w.h.p.) if its probability tends to $1$, and $\log$ is the natural logarithm. The following is \cite[Theorem~19.7]{J12} with the further statements for the case $\lambda<\nu$ omitted.\footnote{In the arXiv version of \cite{J12} the theorem is Theorem~18.7 and the problem below is Problem~18.30.}
+Here $\Po(\infty)$ is the distribution of a random variable that equals $\infty$ identically, an event holds with high probability (w.h.p.) if its probability tends to $1$, and $\log$ is the natural logarithm. The following is \cite[Theorem~19.7]{J12} with the further statements for the case $\lambda<\nu$ omitted.\footnote{In the arXiv version of \cite{J12} the theorem is Theorem~18.7 and the problem below is Problem~18.30.} The largest outdegree of simply generated trees was studied earlier by Meir and Moon \cite{MM90}, and random allocations of balls into boxes by Kolchin \cite{Kol86}; when $\lambda<\nu$ one box takes a positive fraction of the balls, a condensation studied by Jonsson and Stef\'ansson \cite{JS11} and Kortchemski \cite{Kor15}.
 
 \begin{theoremA}[{Janson \cite[Theorem~19.7]{J12}}]
 Let $w=(w_k)_{k\ge0}$ be a weight sequence with $w_0>0$ and $\omega=\infty$. Suppose that $n\to\infty$ and $m=m(n)$ with $m=\lambda n+o(\sqrt n)$ where $0<\lambda\le\nu$. Suppose further that $\sigma^2:=\Var\xi<\infty$. \textup{(}This is redundant when $\lambda<\nu$.\textup{)}
@@ -361,7 +361,7 @@ No data were used. The code and the Lean file are available at\\ \url{https://gi
 
 The paper is part of the Math Brain project, whose public repository is \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
 \bibitem{Ben62}
 G.~Bennett, Probability inequalities for the sum of independent random variables, \emph{J. Amer. Statist. Assoc.} \textbf{57} (1962), 33--45.
@@ -371,8 +371,20 @@ T.~Duquesne, A limit theorem for the contour process of conditioned Galton--Wats
 \bibitem{J12}
 S.~Janson, Simply generated trees, conditioned Galton--Watson trees, random allocations and condensation, \emph{Probab. Surv.} \textbf{9} (2012), 103--252.
 
+\bibitem{JS11}
+T.~Jonsson and S.~\"O.~Stef\'ansson, Condensation in nongeneric trees, \emph{J. Stat. Phys.} \textbf{142} (2011), 277--313.
+
+\bibitem{Kol86}
+V.~F.~Kolchin, \emph{Random Mappings}, Optimization Software, New York, 1986.
+
+\bibitem{Kor15}
+I.~Kortchemski, Limit theorems for conditioned non-generic Galton--Watson trees, \emph{Ann. Inst. Henri Poincar\'e Probab. Stat.} \textbf{51} (2015), 489--511.
+
 \bibitem{KR19}
 I.~Kortchemski and L.~Richier, Condensation in critical Cauchy Bienaym\'e--Galton--Watson trees, \emph{Ann. Appl. Probab.} \textbf{29} (2019), no.~3, 1837--1877.
+
+\bibitem{MM90}
+A.~Meir and J.~W.~Moon, On the maximum out-degree in random trees, \emph{Australas. J. Combin.} \textbf{2} (1990), 147--156.
 
 \bibitem{MU21}
 L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE~28}, Lecture Notes in Comput. Sci. \textbf{12699}, Springer, 2021, 625--635.
